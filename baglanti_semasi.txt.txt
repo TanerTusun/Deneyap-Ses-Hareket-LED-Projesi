@@ -1,0 +1,46 @@
+PROJE: Sese ve Harekete Duyarlı Akıllı LED Sistemi
+DONANIM: Deneyap Kart 1a
+--------------------------------------------------------------
+
+BAĞLANTI YÖNERGESİ:
+Aşağıdaki pin eşleşmeleri Deneyap Kart 1a pin diyagramına ve
+Deneyap modüllerinin standart çıkışlarına göre hazırlanmıştır.
+
+--------------------------------------------------------------
+1. DENEYAP MİKROFON MODÜLÜ (Ses Algılayıcı)
+--------------------------------------------------------------
+Modül üzerindeki pinler  -->  Deneyap Kart 1a üzerindeki pinler
+
+* VCC  --------------------> 3.3V
+* GND  --------------------> GND
+* AO (Analog Output) ------> A0
+
+(Açıklama: Mikrofonun analog veri ucu, kartın A0 pinine bağlanır.)
+
+--------------------------------------------------------------
+2. DENEYAP HAREKET ALGILAMA SENSÖRÜ (PIR)
+--------------------------------------------------------------
+Modül üzerindeki pinler  -->  Deneyap Kart 1a üzerindeki pinler
+
+* VCC  --------------------> 3.3V
+* GND  --------------------> GND
+* DO (Digital Output) -----> D0
+
+(Açıklama: Sensörün dijital sinyal ucu, kartın D0 pinine bağlanır.)
+
+--------------------------------------------------------------
+3. LED GÖSTERGESİ
+--------------------------------------------------------------
+* LED Artı (+) Bacak ------> D1
+* LED Eksi (-) Bacak ------> Direnç ile GND'ye
+
+(Açıklama: LED'in uzun bacağı D1 pinine, kısa bacağı bir direnç
+yardımıyla eksi hatta bağlanır.)
+
+--------------------------------------------------------------
+ÖNEMLİ NOT:
+Kod içerisinde pin tanımlamaları şu şekilde olmalıdır:
+#define MIC_PIN A0
+#define PIR_PIN D0
+#define LED_PIN D1
+--------------------------------------------------------------
