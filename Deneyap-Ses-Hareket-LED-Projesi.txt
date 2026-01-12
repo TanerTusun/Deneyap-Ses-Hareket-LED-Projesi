@@ -1,0 +1,40 @@
+#include "deneyap.h"
+
+// --- GÜNCELLENMİŞ PİN AYARLARI ---
+const int ledPin = D12;      // LED'i D12 pinine aldık (Kartta var!)
+const int hareketPin = D4;   // Hareket Sensörü D4 pininde
+const int mikrofonPin = A0;  // Mikrofon A0 pininde
+
+int hareketDurumu = 0;
+int sesDegeri = 0;
+int sesEsikDegeri = 1890;    // Hassasiyet (Gerekirse artır/azalt)
+
+void setup() {
+  Serial.begin(115200);
+  
+  pinMode(ledPin, OUTPUT);
+  pinMode(hareketPin, INPUT);
+  pinMode(mikrofonPin, INPUT);
+}
+
+void loop() {
+  // 1. Sensörleri Oku
+  hareketDurumu = digitalRead(hareketPin);
+  sesDegeri = analogRead(mikrofonPin);
+
+  // 2. Değerleri Ekrana Yazdır (Seri Port Ekranından takip et)
+  Serial.print("Hareket: ");
+  Serial.print(hareketDurumu);
+  Serial.print(" | Ses: ");
+  Serial.println(sesDegeri);
+
+  // 3. Karar Ver: Hareket varsa VEYA Ses yüksekse yak
+  if (hareketDurumu == HIGH || sesDegeri > sesEsikDegeri) {
+    digitalWrite(ledPin, HIGH); // LED Yanar
+    delay(3000);                // 3 saniye bekle
+  } else {
+    digitalWrite(ledPin, LOW);  // LED Söner
+  }
+  
+  delay(50); // İşlemciyi rahatlat
+}
